@@ -36,6 +36,8 @@ var BuildPlatforms = BuildPlatformList{
 	{"darwin/amd64", CGOSupported | CrossBuildSupported | Default},
 	{"darwin/arm", CGOSupported},
 	{"darwin/arm64", CGOSupported | CrossBuildSupported | Default},
+	// it's a sort of alias for && darwin/arm64
+	{"darwin/universal", CGOSupported | CrossBuildSupported | Default},
 	{"dragonfly/amd64", CGOSupported},
 	{"freebsd/386", CGOSupported},
 	{"freebsd/amd64", CGOSupported},

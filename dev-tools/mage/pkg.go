@@ -18,6 +18,7 @@
 package mage
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -43,6 +44,7 @@ func Package() error {
 			"UseCommunityBeatPackaging, UseElasticBeatPackaging or USeElasticBeatWithoutXPackPackaging first.")
 	}
 
+	// var darwinAMD, darwinARM bool
 	var tasks []interface{}
 	for _, target := range Platforms {
 		for _, pkg := range Packages {
@@ -108,12 +110,25 @@ func Package() error {
 
 				spec = spec.Evaluate()
 
-				tasks = append(tasks, packageBuilder{target, spec, pkgType}.Build)
+				// darwinARM = target.Name == "darwin/arm64"
+				// darwinAMD = target.Name == "darwin/amd64"
+				pkgBuilder := packageBuilder{target, spec, pkgType}
+				if target.Name == "darwin/arm64" || target.Name == "darwin/amd4" {
+					// fmt.Println("pkg.go.Package=========================================================")
+					bs, _ := json.MarshalIndent(pkgBuilder, "", "  ")
+					fmt.Printf("spec: %s\n", bs)
+					// fmt.Println("pkg.go.Package=========================================================")
+				}
+
+				tasks = append(tasks, pkgBuilder.Build)
 			}
 		}
 	}
 
 	Parallel(tasks...)
+	// if darwinARM && darwinAMD {
+	// 	packageBuilder{"darwin", spec, TarGz}.Build)
+	// }
 	return nil
 }
 

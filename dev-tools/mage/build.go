@@ -18,6 +18,7 @@
 package mage
 
 import (
+	"encoding/json"
 	"fmt"
 	"go/build"
 	"log"
@@ -127,8 +128,20 @@ func GolangCrossBuild(params BuildArgs) error {
 
 // Build invokes "go build" to produce a binary.
 func Build(params BuildArgs) error {
+	// if universal, run for amd and srm, then merge the binaries
+	fmt.Println("dev-tool/mage/build.go.Build=============================================================")
+	// panic("dev-tool/mage/build.go.Build")
+	bs, _ := json.MarshalIndent(params, "", "  ")
+	fmt.Println(string(bs))
+	fmt.Println("dev-tool/mage/build.go.Build=============================================================")
+
 	fmt.Println(">> build: Building", params.Name)
 
+	// if params.
+	return build2(params)
+}
+
+func build2(params BuildArgs) error {
 	binaryName := params.Name + binaryExtension(GOOS)
 
 	if params.OutputDir != "" {

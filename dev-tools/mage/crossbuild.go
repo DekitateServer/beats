@@ -129,7 +129,11 @@ type crossBuildParams struct {
 
 // CrossBuild executes a given build target once for each target platform.
 func CrossBuild(options ...CrossBuildOption) error {
-	params := crossBuildParams{Platforms: Platforms, Target: defaultCrossBuildTarget, ImageSelector: CrossBuildImage}
+	params := crossBuildParams{
+		Platforms:     Platforms,
+		Target:        defaultCrossBuildTarget,
+		ImageSelector: CrossBuildImage,
+	}
 	for _, opt := range options {
 		opt(&params)
 	}
@@ -180,7 +184,11 @@ func CrossBuild(options ...CrossBuildOption) error {
 		if !buildPlatform.Flags.CanCrossBuild() {
 			return fmt.Errorf("unsupported cross build platform %v", buildPlatform.Name)
 		}
-		builder := GolangCrossBuilder{buildPlatform.Name, params.Target, params.InDir, params.ImageSelector}
+		builder := GolangCrossBuilder{
+			buildPlatform.Name,
+			params.Target,
+			params.InDir,
+			params.ImageSelector}
 		if params.Serial {
 			if err := builder.Build(); err != nil {
 				// TODO(AndersonQ): find out what is the correct way to print functions.
@@ -224,6 +232,8 @@ func CrossBuildImage(platform string) (string, error) {
 	case platform == "darwin/amd64":
 		tagSuffix = "darwin-debian10"
 	case platform == "darwin/arm64":
+		tagSuffix = "darwin-arm64-debian10"
+	case platform == "darwin/universal":
 		tagSuffix = "darwin-arm64-debian10"
 	case platform == "linux/arm64":
 		tagSuffix = "arm"
@@ -328,7 +338,16 @@ func (b GolangCrossBuilder) Build() error {
 		"-p", b.Platform,
 	)
 
-	return dockerRun(args...)
+	fmt.Println("GolangCrossBuilder.Build==========================================================")
+	// the problem here is that the docker image validates the archs, therefore `universal`
+	// isn't supported...
+	// the validation is based on these yaml: https://github.com/elastic/golang-crossbuild/blob/d81af863039cf93bb4c90c86efa2eb56e8114b3c/go1.17/darwin-arm64/rootfs/compilers.yaml#L3
+	// to make universal2 a "meta" arch, the image would have to allow it...
+	// here is the code that validates based on that yaml: https://github.com/elastic/golang-crossbuild/blob/d81af863039cf93bb4c90c86efa2eb56e8114b3c/go1.17/base-arm/rootfs/entrypoint.go#L135
+	fmt.Println(args)
+	err = dockerRun(args...)
+	fmt.Println("GolangCrossBuilder.Build ==========================================================")
+	return err
 }
 
 // DockerChown chowns files generated during build. EXEC_UID and EXEC_GID must
