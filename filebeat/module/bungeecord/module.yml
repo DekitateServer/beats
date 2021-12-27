@@ -1,0 +1,5 @@
+dashboards:
+- id: Filebeat-bungeecord-log-Dashboard
+  file: Filebeat-bungeecord-log.json
+- id: Filebeat-bungeecord-metrics-Dashboard
+  file: Filebeat-bungeecord-metrics.json

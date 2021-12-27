@@ -1,0 +1,9 @@
+- key: bungeecord
+  title: "bungeecord"
+  description: >
+    bungeecord Module
+  fields:
+    - name: bungeecord
+      type: group
+      description: >
+      fields:

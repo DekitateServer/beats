@@ -1,0 +1,48 @@
+- name: metrics
+  description: Contains fields from the BungeeCord metrics.
+  type: group
+  fields:
+  - name: time
+    description: Metrics time
+    type: keyword
+  - name: online_count
+    description: Online count
+    type: integer
+  - name: player_count
+    description: Player counts per server
+    type: group
+    fields:
+    - name: resource
+      description: Player counts of resource server
+      type: integer
+    - name: extra
+      description: Player counts of extra server
+      type: integer
+    - name: shop
+      description: Player counts of shop server
+      type: integer
+    - name: event
+      description: Player counts of event server
+      type: integer
+    - name: survival
+      description: Player counts of survival server
+      type: integer
+    - name: dev
+      description: Player counts of dev server
+      type: integer
+    - name: lobby
+      description: Player counts of lobby server
+      type: integer
+  - name: ping
+    description: Ping
+    type: group
+    fields:
+    - name: min
+      description: minimum ping
+      type: integer
+    - name: max
+      description: maximum ping
+      type: integer
+    - name: average
+      description: average ping
+      type: double

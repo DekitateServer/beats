@@ -1,0 +1,29 @@
+{
+  "description": "Pipeline for parsing BungeeCord metrics",
+  "processors": [{
+      "grok": {
+        "field": "message",
+        "patterns":[
+          "\\[%{TIME:bungeecord.metrics.time}\\] online_count:%{NUMBER:bungeecord.metrics.online_count},ping_min:%{NUMBER:bungeecord.metrics.ping.min},ping_max:%{NUMBER:bungeecord.metrics.ping.max},ping_average:%{NUMBER:bungeecord.metrics.ping.average},player_count_dev:%{NUMBER:bungeecord.metrics.player_count.dev},player_count_event:%{NUMBER:bungeecord.metrics.player_count.event},player_count_extra:%{NUMBER:bungeecord.metrics.player_count.extra},player_count_lobby:%{NUMBER:bungeecord.metrics.player_count.lobby},player_count_resource:%{NUMBER:bungeecord.metrics.player_count.resource},player_count_shop:%{NUMBER:bungeecord.metrics.player_count.shop},player_count_survival:%{NUMBER:bungeecord.metrics.player_count.survival}",
+          "online_count:%{NUMBER:bungeecord.metrics.online_count}",
+          "player_count_resource:%{NUMBER:bungeecord.metrics.player_count.resource}",
+          "player_count_extra:%{NUMBER:bungeecord.metrics.player_count.extra}",
+          "player_count_shop:%{NUMBER:bungeecord.metrics.player_count.shop}",
+          "player_count_event:%{NUMBER:bungeecord.metrics.player_count.event}",
+          "player_count_survival:%{NUMBER:bungeecord.metrics.player_count.survival}",
+          "player_count_dev:%{NUMBER:bungeecord.metrics.player_count.dev}",
+          "player_count_lobby:%{NUMBER:bungeecord.metrics.player_count.lobby}",
+          "ping_min:%{NUMBER:bungeecord.metrics.ping.min}",
+          "ping_max:%{NUMBER:bungeecord.metrics.ping.max}",
+          "ping_average:%{NUMBER:bungeecord.metrics.ping.average}"
+          ],
+        "ignore_missing": true
+      }
+  }],
+  "on_failure" : [{
+    "set" : {
+      "field" : "error.message",
+      "value" : "{{ _ingest.on_failure_message }}"
+    }
+  }]
+}

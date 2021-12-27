@@ -1,0 +1,18 @@
+{
+  "description": "Pipeline for parsing BungeeCord logs",
+  "processors": [{
+      "grok": {
+        "field": "message",
+        "patterns":[
+          "\\[%{TIME:bungeecord.log.time}\\] \\[%{GREEDYDATA:bungeecord.log.thread}/%{LOGLEVEL:bungeecord.log.level}\\]( \\[%{GREEDYDATA:bungeecord.log.plugin}\\])?: %{GREEDYDATA:bungeecord.log.message}"
+          ],
+        "ignore_missing": true
+      }
+  }],
+  "on_failure" : [{
+    "set" : {
+      "field" : "error.message",
+      "value" : "{{ _ingest.on_failure_message }}"
+    }
+  }]
+}

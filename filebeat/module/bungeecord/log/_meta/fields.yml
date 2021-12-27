@@ -1,0 +1,24 @@
+- name: log
+  type: group
+  description: >
+    Contains fields from the BungeeCord logs.
+  fields:
+  - name: time
+    description: Log time
+    type: keyword
+  - name: thread
+    description: Log thread
+    example: Netty Worker IO Thread
+    type: text
+  - name: level
+    description: Log leve
+    example: INFO
+    type: keyword
+  - name: plugin
+    description: Log plugin
+    example: LunaChat
+    type: text
+  - name: message
+    description: Log message
+    example: This server is running Waterfall version git:Waterfall-Bootstrap:example by md_5
+    type: text
