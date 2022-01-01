@@ -22,6 +22,7 @@ grouped in the following categories:
 * <<exported-fields-barracuda>>
 * <<exported-fields-beat-common>>
 * <<exported-fields-bluecoat>>
+* <<exported-fields-bungeecord>>
 * <<exported-fields-cef>>
 * <<exported-fields-cef-module>>
 * <<exported-fields-checkpoint>>
@@ -14381,6 +14382,205 @@ type: keyword
 This key captures values or decorators used within a registry entry
 
 type: keyword
+
+--
+
+[[exported-fields-bungeecord]]
+== bungeecord fields
+
+bungeecord Module
+
+
+
+[float]
+=== bungeecord
+
+
+
+
+[float]
+=== log
+
+Contains fields from the BungeeCord logs.
+
+
+
+*`bungeecord.log.time`*::
++
+--
+Log time
+
+type: keyword
+
+--
+
+*`bungeecord.log.thread`*::
++
+--
+Log thread
+
+type: text
+
+example: Netty Worker IO Thread
+
+--
+
+*`bungeecord.log.level`*::
++
+--
+Log leve
+
+type: keyword
+
+example: INFO
+
+--
+
+*`bungeecord.log.plugin`*::
++
+--
+Log plugin
+
+type: text
+
+example: LunaChat
+
+--
+
+*`bungeecord.log.message`*::
++
+--
+Log message
+
+type: text
+
+example: This server is running Waterfall version git:Waterfall-Bootstrap:example by md_5
+
+--
+
+[float]
+=== metrics
+
+Contains fields from the BungeeCord metrics.
+
+
+*`bungeecord.metrics.time`*::
++
+--
+Metrics time
+
+type: keyword
+
+--
+
+*`bungeecord.metrics.online_count`*::
++
+--
+Online count
+
+type: integer
+
+--
+
+[float]
+=== player_count
+
+Player counts per server
+
+
+*`bungeecord.metrics.player_count.resource`*::
++
+--
+Player counts of resource server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.extra`*::
++
+--
+Player counts of extra server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.shop`*::
++
+--
+Player counts of shop server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.event`*::
++
+--
+Player counts of event server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.survival`*::
++
+--
+Player counts of survival server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.dev`*::
++
+--
+Player counts of dev server
+
+type: integer
+
+--
+
+*`bungeecord.metrics.player_count.lobby`*::
++
+--
+Player counts of lobby server
+
+type: integer
+
+--
+
+[float]
+=== ping
+
+Ping
+
+
+*`bungeecord.metrics.ping.min`*::
++
+--
+minimum ping
+
+type: integer
+
+--
+
+*`bungeecord.metrics.ping.max`*::
++
+--
+maximum ping
+
+type: integer
+
+--
+
+*`bungeecord.metrics.ping.average`*::
++
+--
+average ping
+
+type: double
 
 --
 

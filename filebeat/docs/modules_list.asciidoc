@@ -11,6 +11,7 @@ This file is generated! See scripts/docs_collector.py
   * <<filebeat-module-azure>>
   * <<filebeat-module-barracuda>>
   * <<filebeat-module-bluecoat>>
+  * <<filebeat-module-bungeecord>>
   * <<filebeat-module-cef>>
   * <<filebeat-module-checkpoint>>
   * <<filebeat-module-cisco>>
@@ -84,6 +85,7 @@ include::modules/awsfargate.asciidoc[]
 include::modules/azure.asciidoc[]
 include::modules/barracuda.asciidoc[]
 include::modules/bluecoat.asciidoc[]
+include::modules/bungeecord.asciidoc[]
 include::modules/cef.asciidoc[]
 include::modules/checkpoint.asciidoc[]
 include::modules/cisco.asciidoc[]
